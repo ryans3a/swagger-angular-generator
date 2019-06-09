@@ -8,6 +8,7 @@
 import {HttpErrorResponse} from '@angular/common/http';
 import {Action} from '@ngrx/store';
 import {RegistrationParams} from '../../../../controllers/Registration';
+import * as __model from '../../../../model';
 
 export enum Actions {
   START = '[Registration registration] Start',

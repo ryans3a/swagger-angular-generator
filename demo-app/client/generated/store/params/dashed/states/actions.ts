@@ -8,6 +8,7 @@
 import {HttpErrorResponse} from '@angular/common/http';
 import {Action} from '@ngrx/store';
 import {DashedParams} from '../../../../controllers/Params';
+import * as __model from '../../../../model';
 
 export enum Actions {
   START = '[Params dashed] Start',

@@ -8,6 +8,7 @@
 import {createFeatureSelector} from '@ngrx/store';
 
 import {HttpErrorResponse} from '@angular/common/http';
+import * as __model from '../../../../model';
 import * as actions from './actions';
 
 export interface LoginState {

@@ -8,6 +8,7 @@
 import {HttpErrorResponse} from '@angular/common/http';
 import {Action} from '@ngrx/store';
 import {LoginParams} from '../../../../controllers/Login';
+import * as __model from '../../../../model';
 
 export enum Actions {
   START = '[Login login] Start',

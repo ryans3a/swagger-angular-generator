@@ -31,9 +31,11 @@ function getActionImports(name: string, simpleName: string, hasParams: boolean,
   if (hasParams) {
     res += `import {${_.upperFirst(simpleName)}Params} from '../../../../controllers/${name}';\n`;
   }
-  // if (importModels) res += `import * as __model from '../../../../model';\n`;
-  // 20190609
-  res += `import * as __model from '../../../../model';\n`;
+  if (importModels) {
+    res += `import * as __model from '../../../../model';\n`;
+  } else {
+    res += `import * as __model from '../../../../model';\n`;
+  }
   res += `\n`;
 
   return res;

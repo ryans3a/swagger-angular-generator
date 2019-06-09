@@ -8,6 +8,7 @@
 import {HttpErrorResponse} from '@angular/common/http';
 import {Action} from '@ngrx/store';
 import {PositionsParams} from '../../../../controllers/Career';
+import * as __model from '../../../../model';
 
 export enum Actions {
   START = '[Career positions] Start',

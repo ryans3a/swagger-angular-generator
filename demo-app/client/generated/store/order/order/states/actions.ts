@@ -8,6 +8,7 @@
 import {HttpErrorResponse} from '@angular/common/http';
 import {Action} from '@ngrx/store';
 import {OrderParams} from '../../../../controllers/Order';
+import * as __model from '../../../../model';
 
 export enum Actions {
   START = '[Order order] Start',

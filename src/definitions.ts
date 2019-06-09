@@ -30,7 +30,7 @@ export function processDefinitions(defs: { [key: string]: Schema }, config: Conf
 
   _.forOwn(defs, (v, source) => {
     // 20190609
-    if (v.title.indexOf(',') === -1) {
+    if (source.indexOf(',') === -1) {
       const file = processDefinition(v, source, config);
       if (file && file.name) {
         const previous = files[file.name];
