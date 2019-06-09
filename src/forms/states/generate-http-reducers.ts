@@ -20,7 +20,9 @@ export function generateHttpReducers(config: Config, name: string, actionClassNa
 function getReducerImports(usesModels: boolean) {
   let res = `import {createFeatureSelector} from '@ngrx/store';\n\n`;
   res += `import {HttpErrorResponse} from '@angular/common/http';\n`;
-  if (usesModels) res += `import * as __model from '../../../../model';\n`;
+  // if (usesModels) res += `import * as __model from '../../../../model';\n`;
+  // 20190609
+  res += `import * as __model from '../../../../model';\n`;
   res += `import * as actions from './actions';\n\n`;
 
   return res;
@@ -49,7 +51,7 @@ function getInitialState(actionClassNameBase: string) {
 function getFeatureSelector(name: string, actionClassNameBase: string) {
   let res = `export const selectorName = '${name}_${actionClassNameBase}';\n`;
   res += `export const get${actionClassNameBase}StateSelector = ` +
-         `createFeatureSelector<${actionClassNameBase}State>(selectorName);\n\n`;
+    `createFeatureSelector<${actionClassNameBase}State>(selectorName);\n\n`;
 
   return res;
 }

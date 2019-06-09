@@ -22,19 +22,24 @@ export interface ProcessedDefinition {
  * @param defs definitions from the schema
  * @param config global configuration
  */
-export function processDefinitions(defs: {[key: string]: Schema}, config: Config): ProcessedDefinition[] {
+export function processDefinitions(defs: { [key: string]: Schema }, config: Config): ProcessedDefinition[] {
   emptyDir(path.join(config.dest, conf.defsDir));
 
   const definitions: ProcessedDefinition[] = [];
-  const files: {[key: string]: string[]} = {};
+  const files: { [key: string]: string[] } = {};
 
   _.forOwn(defs, (v, source) => {
-    const file = processDefinition(v, source, config);
-    if (file && file.name) {
-      const previous = files[file.name];
-      if (previous === undefined) files[file.name] = [source];
-      else previous.push(source);
-      definitions.push(file);
+    // 20190609
+    if (v.title.indexOf(',') === -1) {
+      const file = processDefinition(v, source, config);
+      if (file && file.name) {
+        const previous = files[file.name];
+        if (previous === undefined)
+          files[file.name] = [source];
+        else
+          previous.push(source);
+        definitions.push(file);
+      }
     }
   });
 

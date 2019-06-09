@@ -107,7 +107,13 @@ export function processProperty(prop: Schema, name = '', namespace = '',
   // pure type is returned if no name is specified
   if (name) {
     if (!isMap) name = getAccessor(name);
-    property = `${comment}${readOnly}${name}${optional}: ${type};`;
+    // 20190609
+    if (name.indexOf(':') === -1) {
+      property = `${comment}${readOnly}${name}${optional}: ${type};`;
+    }
+    else {
+      property = `{${comment}${readOnly}${name}${optional}: ${type}}`;
+    }
     propertyAsMethodParameter = `${name}${optional}: ${type}`;
   } else {
     property = `${type}`;

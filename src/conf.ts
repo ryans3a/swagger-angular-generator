@@ -39,6 +39,9 @@ export const nativeTypes: {[key in NativeNames]: string} = {
 // The 'parameters: []' type is only technical and serves for situations when common parameters are defined
 // on the same level as HTTP methods
 export const allowedParams: {[key in MethodName]: ParamLocation[]} = {
+  // 20190609
+  options: ['path', 'query', 'header'],
+  head: ['path', 'query', 'header'],
   get: ['path', 'query', 'header'],
   patch: ['path', 'body', 'query', 'formData', 'header'],
   post: ['path', 'body', 'query', 'formData', 'header'],
@@ -50,7 +53,7 @@ export const allowedParams: {[key in MethodName]: ParamLocation[]} = {
 export const controllerIgnores = ['BackOffice'];
 // implemented only for api
 // once other one is needed, make it file-based
-export const adHocExceptions: {[key: string]: {[key: string]: [RegExp, string]}} = {
+export const adHocExceptions: { [key: string]: { [key: string]: [RegExp, string] } } = {
   api: {
     Help: [/^  itemNumbers\?: ref;$/m, '  itemNumbers?: number[]'],
   },
