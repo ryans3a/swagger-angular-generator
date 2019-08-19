@@ -63,10 +63,10 @@
     "codelyzer": "^5.0.1",
     "rxjs": "^6.5.2",
     "tape": "^4.10.1",
-    "ts-node": "^8.0.2",
+    "ts-node": "^8.3.0",
     "tslint": "^5.13.0",
     "tslint-eslint-rules": "^5.4.0",
-    "typescript": "^3.3.3333",
+    "typescript": "^3.5.3",
     "zone.js": "~0.9.1"
   },
   "peerDependencies": {}
