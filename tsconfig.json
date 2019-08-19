@@ -13,9 +13,9 @@
       "dom",
       "es2017"
     ],
-    "module": "esnext",
+    "module": "commonjs",
     "sourceMap": true,
-    "target": "es2015"
+    "target": "es2017"
   },
   "include": [
     "src/**/*.ts"

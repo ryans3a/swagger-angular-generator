@@ -1,25 +1,23 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Processing of custom types from `paths` section
  * in the schema
  */
-const _ = require("lodash");
-const common_1 = require("../common");
-const utils_1 = require("../utils");
+import * as _ from 'lodash';
+import { processProperty } from '../common';
+import { indent } from '../utils';
 /**
  * Transforms input parameters to interfaces definition
  * @param def definition
  * @param paramsType name of the type
  */
-function processParams(def, paramsType) {
+export function processParams(def, paramsType) {
     let paramDef = '';
     let typesOnly = '';
     paramDef += `export interface ${paramsType} {\n`;
-    const params = _.map(def, p => common_1.processProperty(parameterToSchema(p), p.name, paramsType, p.required)[0]);
+    const params = _.map(def, p => processProperty(parameterToSchema(p), p.name, paramsType, p.required)[0]);
     const isInterfaceEmpty = !params.length;
     const usesGlobalType = params.some(p => !p.native);
-    paramDef += utils_1.indent(_.map(params, 'property'));
+    paramDef += indent(_.map(params, 'property'));
     paramDef += `\n`;
     paramDef += `}\n`;
     const enums = _.map(params, 'enumDeclaration').filter(Boolean);
@@ -32,11 +30,10 @@ function processParams(def, paramsType) {
     typesOnly = params.map(p => p.propertyAsMethodParameter).join(', ');
     return { paramDef, typesOnly, usesGlobalType, isInterfaceEmpty };
 }
-exports.processParams = processParams;
 // TODO! use required array to set the variable
 // TODO might be unnecessary for v3.0+ of OpenAPI spec
 // https://swagger.io/specification/#parameterObject
-function parameterToSchema(param) {
+export function parameterToSchema(param) {
     return Object.assign({
         allowEmptyValue: param.allowEmptyValue,
         default: param.default,
@@ -53,5 +50,4 @@ function parameterToSchema(param) {
         uniqueItems: param.uniqueItems,
     }, param.schema);
 }
-exports.parameterToSchema = parameterToSchema;
 //# sourceMappingURL=process-params.js.map

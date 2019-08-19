@@ -1,21 +1,19 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 // relative to project root
-exports.outDir = 'src/api';
-exports.commonDir = 'common';
-exports.defsDir = 'defs';
-exports.apiDir = 'controllers';
-exports.storeDir = 'store';
-exports.stateDir = 'states';
-exports.apiFile = 'conf/api/api-docs.json';
-exports.modelFile = 'model';
-exports.indentation = 2;
-exports.swaggerUrlPath = '/swagger';
-exports.omitVersion = false;
+export const outDir = 'src/api';
+export const commonDir = 'common';
+export const defsDir = 'defs';
+export const apiDir = 'controllers';
+export const storeDir = 'store';
+export const stateDir = 'states';
+export const apiFile = 'conf/api/api-docs.json';
+export const modelFile = 'model';
+export const indentation = 2;
+export const swaggerUrlPath = '/swagger';
+export const omitVersion = false;
 // part of path in url
-exports.swaggerFile = '/swagger-ui.html#!/';
+export const swaggerFile = '/swagger-ui.html#!/';
 // mapping from swagger native types to javascript types
-exports.nativeTypes = {
+export const nativeTypes = {
     binary: 'number',
     boolean: 'boolean',
     byte: 'number',
@@ -35,7 +33,7 @@ exports.nativeTypes = {
 // ordered as they are passed to api service methods
 // The 'parameters: []' type is only technical and serves for situations when common parameters are defined
 // on the same level as HTTP methods
-exports.allowedParams = {
+export const allowedParams = {
     // 20190609
     options: ['path', 'query', 'header'],
     head: ['path', 'query', 'header'],
@@ -47,10 +45,10 @@ exports.allowedParams = {
 };
 // list of simplified names of controllers
 // that do not to generate api layer
-exports.controllerIgnores = ['BackOffice'];
+export const controllerIgnores = ['BackOffice'];
 // implemented only for api
 // once other one is needed, make it file-based
-exports.adHocExceptions = {
+export const adHocExceptions = {
     api: {
         Help: [/^  itemNumbers\?: ref;$/m, '  itemNumbers?: number[]'],
     },

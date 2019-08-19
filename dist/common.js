@@ -1,16 +1,14 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const _ = require("lodash");
-const tsutils_1 = require("tsutils");
-const conf = require("./conf");
-const utils_1 = require("./utils");
+import * as _ from 'lodash';
+import { isValidPropertyName } from 'tsutils';
+import * as conf from './conf';
+import { indent, makeComment } from './utils';
 /**
  * Processes one property of the type
  * @param prop property definition
  * @param name property name
  * @param namespace usage context for type name uniqueness
  */
-function processProperty(prop, name = '', namespace = '', required = false, exportEnums = true) {
+export function processProperty(prop, name = '', namespace = '', required = false, exportEnums = true) {
     let type;
     let enumDeclaration;
     let native = true;
@@ -30,7 +28,7 @@ function processProperty(prop, name = '', namespace = '', required = false, expo
         if (prop.items && prop.items.enum)
             list = prop.items.enum;
         const exp = exportEnums ? 'export ' : '';
-        enumDeclaration = `${exp}type ${type} =\n` + utils_1.indent('\'' + list.join('\' |\n\'')) + '\';';
+        enumDeclaration = `${exp}type ${type} =\n` + indent('\'' + list.join('\' |\n\'')) + '\';';
         if (prop.type === 'array')
             type += '[]';
     }
@@ -95,7 +93,7 @@ function processProperty(prop, name = '', namespace = '', required = false, expo
         comments.push(`format: ${prop.format}`);
     if (prop.default)
         comments.push(`default: ${prop.default}`);
-    const comment = utils_1.makeComment(comments);
+    const comment = makeComment(comments);
     let property;
     let propertyAsMethodParameter;
     // pure type is returned if no name is specified
@@ -117,7 +115,6 @@ function processProperty(prop, name = '', namespace = '', required = false, expo
     }
     return [{ property, propertyAsMethodParameter, enumDeclaration, native, isRequired: optional !== '?' }];
 }
-exports.processProperty = processProperty;
 /**
  * - recursive inside-out unwrapping of generics
  * - space removal e.g.
@@ -126,7 +123,7 @@ exports.processProperty = processProperty;
  * @param type original type name
  * @return normalized type name
  */
-function normalizeDef(type) {
+export function normalizeDef(type) {
     let res = '';
     while (true) {
         const generic = type.match(/([^«]+)«(.+)»/);
@@ -145,12 +142,11 @@ function normalizeDef(type) {
     res = _.upperFirst(res);
     return res;
 }
-exports.normalizeDef = normalizeDef;
 /**
  * Translates schema type into native/defined type for typescript
  * @param type definition
  */
-function translateType(type) {
+export function translateType(type) {
     if (type in conf.nativeTypes) {
         const typeType = type;
         return {
@@ -164,7 +160,6 @@ function translateType(type) {
         return resolveDefType(subtype[1]);
     return { type, native: true, arraySimple: true };
 }
-exports.translateType = translateType;
 /**
  * Checks whether the type should reference internally defined type
  * and returns its reference to globally exported interfaces
@@ -188,9 +183,9 @@ function resolveDefType(type) {
         arraySimple: true,
     };
 }
-function getAccessor(key, propName = '') {
+export function getAccessor(key, propName = '') {
     let res = key;
-    if (tsutils_1.isValidPropertyName(key)) {
+    if (isValidPropertyName(key)) {
         if (propName)
             return `${propName}.${res}`;
         return res;
@@ -200,9 +195,7 @@ function getAccessor(key, propName = '') {
         return `${propName}[${res}]`;
     return res;
 }
-exports.getAccessor = getAccessor;
-function getObjectPropSetter(key, propName, suffix = '') {
+export function getObjectPropSetter(key, propName, suffix = '') {
     return `${getAccessor(key)}: ${getAccessor(key, propName)}${suffix},`;
 }
-exports.getObjectPropSetter = getObjectPropSetter;
 //# sourceMappingURL=common.js.map

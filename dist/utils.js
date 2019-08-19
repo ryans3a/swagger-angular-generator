@@ -1,7 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const fs = require("fs");
-const conf = require("./conf");
+import * as fs from 'fs';
+import * as conf from './conf';
 /**
  * Checks if directory exists
  * @param path
@@ -23,17 +21,16 @@ function doesDirExist(path) {
  * Creates directory based on provided path
  * @param path
  */
-function createDir(path) {
+export function createDir(path) {
     if (!doesDirExist(path))
         fs.mkdirSync(path);
 }
-exports.createDir = createDir;
 /**
  * Recursively deletes the path and optionally creates self as an empty directory
  * @param path
  * @param removeSelf whether to remove the directory itself or just its content
  */
-function emptyDir(path, removeSelf = false) {
+export function emptyDir(path, removeSelf = false) {
     if (!fs.existsSync(path)) {
         if (!removeSelf)
             fs.mkdirSync(path);
@@ -49,13 +46,12 @@ function emptyDir(path, removeSelf = false) {
     if (removeSelf)
         fs.rmdirSync(path);
 }
-exports.emptyDir = emptyDir;
 /**
  * Indents the input
  * @param input string (with new-line separation) or array of lines
  * @param level of indentation, takes into account `conf` indentation setting
  */
-function indent(input, level = 1) {
+export function indent(input, level = 1) {
     if (Array.isArray(input))
         input = input.join('\n');
     let res;
@@ -63,13 +59,12 @@ function indent(input, level = 1) {
     res = res.replace(/^\s+$/gm, '');
     return res;
 }
-exports.indent = indent;
 /**
  * Serializes the content to the file including global header
  * @param file
  * @param content
  */
-function writeFile(file, content, header = '', fileType = 'ts', disableFlags) {
+export function writeFile(file, content, header = '', fileType = 'ts', disableFlags) {
     if (fileType === 'ts') {
         if (!disableFlags)
             disableFlags = ['max-line-length'];
@@ -83,12 +78,11 @@ function writeFile(file, content, header = '', fileType = 'ts', disableFlags) {
     fs.writeFileSync(file, content);
     out(`${file} generated`, TermColors.green);
 }
-exports.writeFile = writeFile;
 /**
  * Makes the string commented, supports single/multi-line and empty output
  * @param input string (with new-line separation) or array of lines
  */
-function makeComment(input) {
+export function makeComment(input) {
     if (Array.isArray(input))
         input = input.join('\n');
     input = input.split('\n');
@@ -102,14 +96,13 @@ function makeComment(input) {
     }
     return res;
 }
-exports.makeComment = makeComment;
 /**
  * Creates a unified header for all serialized files
  * @param schemaDef input schema header
  * @param swaggerUrlPath the path where the swagger ui definition can be found
  * @param version should API version info be included in generated files
  */
-function processHeader(schemaDef, omitVersion = false) {
+export function processHeader(schemaDef, omitVersion = false) {
     const relevant = {
         info: schemaDef.info,
         path: schemaDef.host + (schemaDef.basePath || ''),
@@ -123,26 +116,24 @@ function processHeader(schemaDef, omitVersion = false) {
     res = res.split('\n').filter(l => l.match(/\w/)).join('\n');
     return makeComment(res);
 }
-exports.processHeader = processHeader;
-var TermColors;
+export var TermColors;
 (function (TermColors) {
     TermColors["green"] = "\u001B[32m";
     TermColors["red"] = "\u001B[31m";
     TermColors["default"] = "\u001B[0m";
-})(TermColors = exports.TermColors || (exports.TermColors = {}));
+})(TermColors || (TermColors = {}));
 /**
  * Outputs text in optional color
  * @param text
  * @param color
  */
-function out(text, color) {
+export function out(text, color) {
     if (Array.isArray(text))
         text = text.join('\n');
     if (color)
         text = `${color}${text}${TermColors.default}`;
     process.stdout.write(`${text}\n`);
 }
-exports.out = out;
 /**
  * From others it filters out duplicate elements which are included in favoured.
  * Duplicates = same values for keys.
@@ -150,7 +141,7 @@ exports.out = out;
  * @param others
  * @param keys
  */
-function merge(favoured, others, ...keys) {
+export function merge(favoured, others, ...keys) {
     const othersFiltered = others
         .filter(elem => {
         return !favoured.find(subElem => keys
@@ -159,5 +150,4 @@ function merge(favoured, others, ...keys) {
     });
     return favoured.concat(othersFiltered);
 }
-exports.merge = merge;
 //# sourceMappingURL=utils.js.map

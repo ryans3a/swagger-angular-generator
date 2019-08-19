@@ -1,13 +1,11 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Processing of custom types from `paths` section
  * in the schema
  */
-const _ = require("lodash");
-const conf = require("../conf");
-const utils_1 = require("../utils");
-const process_controller_1 = require("./process-controller");
+import * as _ from 'lodash';
+import * as conf from '../conf';
+import { merge } from '../utils';
+import { processController } from './process-controller';
 /**
  * Entry point, processes all possible api requests and exports them
  * to files devided ty controllers (same as swagger web app sections)
@@ -17,7 +15,7 @@ const process_controller_1 = require("./process-controller");
  * @param definitions
  * @param basePath base URL path
  */
-function processPaths(pathsWithParameters, swaggerPath, config, definitions, basePath) {
+export function processPaths(pathsWithParameters, swaggerPath, config, definitions, basePath) {
     const paths = preProcessPaths(pathsWithParameters);
     const controllers = _.flatMap(paths, (methods, url) => (_.map(methods, (method, methodName) => ({
         url,
@@ -35,9 +33,8 @@ function processPaths(pathsWithParameters, swaggerPath, config, definitions, bas
     }))));
     const controllerFiles = _.groupBy(controllers, 'name');
     conf.controllerIgnores.forEach(key => delete controllerFiles[key]);
-    _.forEach(controllerFiles, (methods, name) => process_controller_1.processController(methods, name, config, definitions));
+    _.forEach(controllerFiles, (methods, name) => processController(methods, name, config, definitions));
 }
-exports.processPaths = processPaths;
 /**
  * Returns simple name from last static URL segment
  * example: `/accounts/${accountId}/updateMothersName` => `updateMothersName`
@@ -75,7 +72,7 @@ function preProcessPaths(paths) {
                 if (key === 'parameters')
                     return;
                 const method = pathValue[key];
-                method.parameters = utils_1.merge(method.parameters, pathValue.parameters, 'in', 'name');
+                method.parameters = merge(method.parameters, pathValue.parameters, 'in', 'name');
             });
         }
         delete pathValue.parameters;

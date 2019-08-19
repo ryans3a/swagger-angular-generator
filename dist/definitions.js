@@ -1,22 +1,20 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Processing of custom types from `definitions` section
  * in the schema
  */
-const _ = require("lodash");
-const path = require("path");
-const common_1 = require("./common");
-const conf = require("./conf");
-const utils_1 = require("./utils");
+import * as _ from 'lodash';
+import * as path from 'path';
+import { normalizeDef, processProperty } from './common';
+import * as conf from './conf';
+import { emptyDir, indent, writeFile } from './utils';
 /**
  * Entry point, processes all definitions and exports them
  * to individual files
  * @param defs definitions from the schema
  * @param config global configuration
  */
-function processDefinitions(defs, config) {
-    utils_1.emptyDir(path.join(config.dest, conf.defsDir));
+export function processDefinitions(defs, config) {
+    emptyDir(path.join(config.dest, conf.defsDir));
     const definitions = [];
     const files = {};
     _.forOwn(defs, (v, source) => {
@@ -25,10 +23,12 @@ function processDefinitions(defs, config) {
             const file = processDefinition(v, source, config);
             if (file && file.name) {
                 const previous = files[file.name];
-                if (previous === undefined)
+                if (previous === undefined) {
                     files[file.name] = [source];
-                else
+                }
+                else {
                     previous.push(source);
+                }
                 definitions.push(file);
             }
         }
@@ -40,22 +40,20 @@ function processDefinitions(defs, config) {
     writeToBaseModelFile(config, allExports);
     return definitions;
 }
-exports.processDefinitions = processDefinitions;
-function writeToBaseModelFile(config, allExports) {
+export function writeToBaseModelFile(config, allExports) {
     const filename = path.join(config.dest, `${conf.modelFile}.ts`);
-    utils_1.writeFile(filename, allExports, config.header);
+    writeFile(filename, allExports, config.header);
 }
-exports.writeToBaseModelFile = writeToBaseModelFile;
 /**
  * Creates the file of the type definition
  * @param def type definition
  * @param name name of the type definition and after normalization of the resulting interface + file
  */
-function processDefinition(def, name, config) {
-    name = common_1.normalizeDef(name);
+export function processDefinition(def, name, config) {
+    name = normalizeDef(name);
     let output = '';
     if (def.type === 'array') {
-        const property = common_1.processProperty(def)[0];
+        const property = processProperty(def)[0];
         if (!property.native) {
             output += `import * as __${conf.modelFile} from \'../${conf.modelFile}\';\n\n`;
         }
@@ -64,7 +62,7 @@ function processDefinition(def, name, config) {
         output += `export type ${name} = ${property.property};\n`;
     }
     else if (def.properties || def.additionalProperties) {
-        const properties = common_1.processProperty(def, undefined, name);
+        const properties = processProperty(def, undefined, name);
         // conditional import of global types
         if (properties.some(p => !p.native)) {
             output += `import * as __${conf.modelFile} from \'../${conf.modelFile}\';\n\n`;
@@ -72,7 +70,7 @@ function processDefinition(def, name, config) {
         if (def.description)
             output += `/** ${def.description} */\n`;
         output += `export interface ${name} {\n`;
-        output += utils_1.indent(_.map(properties, 'property').join('\n'));
+        output += indent(_.map(properties, 'property').join('\n'));
         output += `\n}\n`;
         // concat non-empty enum lines
         const enumLines = _.map(properties, 'enumDeclaration').filter(Boolean).join('\n\n');
@@ -80,18 +78,16 @@ function processDefinition(def, name, config) {
             output += `\n${enumLines}\n`;
     }
     const filename = path.join(config.dest, conf.defsDir, `${name}.ts`);
-    utils_1.writeFile(filename, output, config.header);
+    writeFile(filename, output, config.header);
     return { name, def };
 }
-exports.processDefinition = processDefinition;
 /**
  * Creates single export line for `def` name
  * @param def name of the definition file w/o extension
  */
-function createExport(def) {
+export function createExport(def) {
     return `export * from './${conf.defsDir}/${def}';`;
 }
-exports.createExport = createExport;
 /**
  * Creates comment naming source definitions for the export
  * @param def name of the definition file w/o extension
