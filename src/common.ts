@@ -110,8 +110,7 @@ export function processProperty(prop: Schema, name = '', namespace = '',
     // 20190609
     if (name.indexOf(':') === -1) {
       property = `${comment}${readOnly}${name}${optional}: ${type};`;
-    }
-    else {
+    } else {
       property = `{${comment}${readOnly}${name}${optional}: ${type}}`;
     }
     propertyAsMethodParameter = `${name}${optional}: ${type}`;

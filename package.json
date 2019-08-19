@@ -45,7 +45,7 @@
   "homepage": "https://github.com/jnwltr/swagger-angular-generator#readme",
   "dependencies": {
     "commander": "^2.18.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.15",
     "tsutils": "^3.8.0"
   },
   "devDependencies": {
@@ -54,8 +54,8 @@
     "@angular/core": "^8.2.2",
     "@angular/forms": "^8.2.2",
     "@angular/platform-browser": "^8.2.2",
-    "@ngrx/effects": "^7.3.0",
-    "@ngrx/store": "^7.3.0",
+    "@ngrx/effects": "^8.2.0",
+    "@ngrx/store": "^8.2.0",
     "@types/commander": "^2.12.2",
     "@types/lodash": "^4.14.121",
     "@types/node": "^11.9.5",
@@ -69,8 +69,5 @@
     "typescript": "^3.3.3333",
     "zone.js": "~0.9.1"
   },
-  "peerDependencies": {
-    "@ngrx/effects": "^7.3.0",
-    "@ngrx/store": "^7.3.0"
-  }
+  "peerDependencies": {}
 }

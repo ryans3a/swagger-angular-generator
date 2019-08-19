@@ -34,10 +34,11 @@ export function processDefinitions(defs: { [key: string]: Schema }, config: Conf
       const file = processDefinition(v, source, config);
       if (file && file.name) {
         const previous = files[file.name];
-        if (previous === undefined)
+        if (previous === undefined) {
           files[file.name] = [source];
-        else
+        } else {
           previous.push(source);
+        }
         definitions.push(file);
       }
     }
