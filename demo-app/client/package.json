@@ -21,13 +21,13 @@
     "@angular/forms": "^8.2.2",
     "@angular/platform-browser": "^8.2.2",
     "@angular/platform-browser-dynamic": "^8.2.2",
-    "@ngrx/effects": "^7.3.0",
-    "@ngrx/store": "^7.3.0",
-    "@ngrx/store-devtools": "^7.3.0",
+    "@ngrx/effects": "^8.2.0",
+    "@ngrx/store": "^8.2.0",
+    "@ngrx/store-devtools": "^8.2.0",
     "commander": "^2.15.1",
     "core-js": "^2.6.5",
     "lodash": "^4.17.15",
-    "rxjs": "^6.4.0",
+    "rxjs": "^6.5.2",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
