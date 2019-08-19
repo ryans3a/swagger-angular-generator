@@ -13,13 +13,13 @@
     "strictNullChecks": true,
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
-    "target": "es2017",
+    "target": "es6",
     "typeRoots": [
       "node_modules/@types"
     ],
     "lib": [
       "dom",
-      "es2017"
+      "es6"
     ]
   },
   "include": [

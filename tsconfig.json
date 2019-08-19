@@ -11,11 +11,11 @@
     "noUnusedParameters": true,
     "lib": [
       "dom",
-      "es2017"
+      "es6"
     ],
     "module": "commonjs",
     "sourceMap": true,
-    "target": "es2017"
+    "target": "es6"
   },
   "include": [
     "src/**/*.ts"
