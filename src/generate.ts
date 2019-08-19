@@ -63,7 +63,7 @@ export function generate(
   if (!fs.existsSync(dest)) fs.mkdirSync(dest);
   const definitions = processDefinitions(schema.definitions, config);
   processPaths(schema.paths, `http://${schema.host}${swaggerUrlPath}${conf.swaggerFile}`,
-               config, definitions, schema.basePath);
+    config, definitions, schema.basePath);
 }
 
 function recreateDirectories(dest: string, generateStore: boolean) {
