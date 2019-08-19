@@ -49,34 +49,28 @@
     "tsutils": "^3.8.0"
   },
   "devDependencies": {
-    "@angular/cli": "^7.3.3",
-    "@angular/common": "^7.2.7",
-    "@angular/core": "^7.2.7",
-    "@angular/forms": "^7.2.7",
-    "@angular/http": "^7.2.7",
-    "@angular/platform-browser": "^7.2.7",
+    "@angular/cli": "^8.2.2",
+    "@angular/common": "^8.2.2",
+    "@angular/core": "^8.2.2",
+    "@angular/forms": "^8.2.2",
+    "@angular/platform-browser": "^8.2.2",
     "@ngrx/effects": "^7.3.0",
     "@ngrx/store": "^7.3.0",
     "@types/commander": "^2.12.2",
     "@types/lodash": "^4.14.121",
     "@types/node": "^11.9.5",
     "@types/tape": "^4.2.33",
-    "rxjs": "^6.4.0",
+    "codelyzer": "^5.0.1",
+    "rxjs": "^6.5.2",
     "tape": "^4.10.1",
     "ts-node": "^8.0.2",
     "tslint": "^5.13.0",
     "tslint-eslint-rules": "^5.4.0",
     "typescript": "^3.3.3333",
-    "zone.js": "^0.8.29"
+    "zone.js": "~0.9.1"
   },
   "peerDependencies": {
-    "@angular/common": "^7.2.7",
-    "@angular/core": "^7.2.7",
-    "@angular/http": "^7.2.7",
-    "@angular/platform-browser": "^7.2.7",
     "@ngrx/effects": "^7.3.0",
-    "@ngrx/store": "^7.3.0",
-    "rxjs": "^6.4.0",
-    "zone.js": "^0.8.29"
+    "@ngrx/store": "^7.3.0"
   }
 }

@@ -2,6 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "declaration": false,
+    "downlevelIteration": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
@@ -12,9 +13,9 @@
       "dom",
       "es2017"
     ],
-    "module": "commonjs",
+    "module": "esnext",
     "sourceMap": true,
-    "target": "es2017"
+    "target": "es2015"
   },
   "include": [
     "src/**/*.ts"
