@@ -2,7 +2,6 @@
   "compileOnSave": false,
   "compilerOptions": {
     "declaration": false,
-    "downlevelIteration": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
@@ -11,11 +10,11 @@
     "noUnusedParameters": true,
     "lib": [
       "dom",
-      "es6"
+      "es2017"
     ],
     "module": "commonjs",
     "sourceMap": true,
-    "target": "es6"
+    "target": "es2017"
   },
   "include": [
     "src/**/*.ts"
